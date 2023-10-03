@@ -1,0 +1,121 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "id": "7e51beb9-14dc-4002-92be-59048e1e80f0",
+  "prevId": "dd94b695-c184-48ae-88ee-bfdeed898677",
+  "tables": {
+    "org": {
+      "name": "org",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "contact_name": {
+          "name": "contact_name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "schlachtruf": {
+          "name": "schlachtruf",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tollitäten": {
+          "name": "tollitäten",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "description": {
+          "name": "description",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "org_name_unique": {
+          "name": "org_name_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "name"
+          ]
+        }
+      }
+    },
+    "timeslots": {
+      "name": "timeslots",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "timeslot": {
+          "name": "timeslot",
+          "type": "time",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "org_id": {
+          "name": "org_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "timeslots_org_id_org_id_fk": {
+          "name": "timeslots_org_id_org_id_fk",
+          "tableFrom": "timeslots",
+          "tableTo": "org",
+          "columnsFrom": [
+            "org_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "timeslots_timeslot_unique": {
+          "name": "timeslots_timeslot_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "timeslot"
+          ]
+        }
+      }
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {
+      "\"timeslots\".\"time\"": "\"timeslots\".\"timeslot\""
+    }
+  }
+}

@@ -1,0 +1,1 @@
+ALTER TABLE "org" ALTER COLUMN "tollitäten" DROP NOT NULL;

@@ -7,26 +7,38 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "generate": "drizzle-kit generate:pg",
-    "migrate": "drizzle-kit push:pg"
+    "generate": "drizzle-kit generate:pg"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.3.1",
+    "@radix-ui/react-dialog": "^1.0.5",
+    "@radix-ui/react-label": "^2.0.2",
+    "@radix-ui/react-slot": "^1.0.2",
     "@vercel/postgres": "^0.5.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.0.0",
     "drizzle-orm": "^0.28.6",
+    "drizzle-zod": "^0.5.1",
+    "lucide-react": "^0.284.0",
     "next": "13.5.4",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-hook-form": "^7.47.0",
+    "tailwind-merge": "^1.14.0",
+    "tailwindcss-animate": "^1.0.7",
+    "zod": "^3.22.2"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10",
+    "dotenv": "^16.3.1",
     "drizzle-kit": "^0.19.13",
     "esbuild": "^0.19.4",
-    "esbuild-register": "^3.5.0",
     "eslint": "^8",
     "eslint-config-next": "13.5.4",
+    "pg": "^8.11.3",
     "postcss": "^8",
     "tailwindcss": "^3",
     "typescript": "^5"

@@ -3,6 +3,6 @@ import { orgs } from "./org";
 
 export const timeslots = pgTable("timeslots", {
   id: serial("id").primaryKey(),
-  time: time("time"),
+  time: time("timeslot").unique().notNull(),
   orgId: integer("org_id").references(() => orgs.id),
 });

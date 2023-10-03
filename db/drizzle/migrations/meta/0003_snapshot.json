@@ -1,8 +1,8 @@
 {
   "version": "5",
   "dialect": "pg",
-  "id": "ee9d586a-e42a-42c5-850d-3ad88fef32ad",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "7bf4d968-fc6d-490e-b8c7-903e899ca2d6",
+  "prevId": "9414cd7e-f259-4fc9-b3a2-9971107ee493",
   "tables": {
     "org": {
       "name": "org",
@@ -18,25 +18,31 @@
           "name": "name",
           "type": "varchar",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "contact_name": {
           "name": "contact_name",
           "type": "varchar",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
+        },
+        "contact_mail": {
+          "name": "contact_mail",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
         },
         "schlachtruf": {
           "name": "schlachtruf",
           "type": "varchar",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "tollitäten": {
           "name": "tollitäten",
           "type": "varchar",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "description": {
           "name": "description",
@@ -48,7 +54,15 @@
       "indexes": {},
       "foreignKeys": {},
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
+      "uniqueConstraints": {
+        "org_name_unique": {
+          "name": "org_name_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "name"
+          ]
+        }
+      }
     },
     "timeslots": {
       "name": "timeslots",
@@ -60,11 +74,11 @@
           "primaryKey": true,
           "notNull": true
         },
-        "time": {
-          "name": "time",
+        "timeslot": {
+          "name": "timeslot",
           "type": "time",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "org_id": {
           "name": "org_id",
@@ -90,7 +104,15 @@
         }
       },
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
+      "uniqueConstraints": {
+        "timeslots_timeslot_unique": {
+          "name": "timeslots_timeslot_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "timeslot"
+          ]
+        }
+      }
     }
   },
   "enums": {},

@@ -4,13 +4,15 @@ CREATE TABLE IF NOT EXISTS "org" (
 	"contact_name" varchar,
 	"schlachtruf" varchar,
 	"tollitäten" varchar,
-	"description" varchar
+	"description" varchar,
+	CONSTRAINT "org_name_unique" UNIQUE("name")
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "timeslots" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"time" time,
-	"org_id" integer
+	"org_id" integer,
+	CONSTRAINT "timeslots_time_unique" UNIQUE("time")
 );
 --> statement-breakpoint
 DO $$ BEGIN
