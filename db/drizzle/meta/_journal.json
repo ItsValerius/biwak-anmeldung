@@ -1,0 +1,13 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1696324649649,
+      "tag": "0000_illegal_preak",
+      "breakpoints": true
+    }
+  ]
+}
