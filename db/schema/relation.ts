@@ -1,10 +1,9 @@
 import { relations } from "drizzle-orm";
 import { orgs } from "./org";
-import { timeslots } from "./timeslots";
 
-export const orgsRelation = relations(orgs, ({ one }) => ({
-  timeslots: one(timeslots, {
+export const timeslotsRelation = relations(orgs, ({ one }) => ({
+  orgs: one(orgs, {
     fields: [orgs.id],
-    references: [timeslots.orgId],
+    references: [orgs.timeslotId],
   }),
 }));

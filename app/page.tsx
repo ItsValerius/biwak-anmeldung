@@ -22,10 +22,15 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { BuchungsForm } from "@/components/BuchungsForm";
+import { orgs } from "@/db/schema/org";
+import { eq } from "drizzle-orm";
 
 export default async function Home() {
-  const slots = await db.select().from(timeslots).orderBy(timeslots.id);
-  console.log(slots);
+  const slots = await db
+    .select()
+    .from(timeslots)
+    .orderBy(timeslots.id)
+    .leftJoin(orgs, eq(timeslots.id, orgs.timeslotId));
 
   return (
     <main className="flex min-h-screen flex-col items-center gap-12  md:gap-16 p-12 md:p-16 lg:p-24 max-w-5xl mx-auto">
@@ -42,10 +47,16 @@ export default async function Home() {
         <TableBody>
           {slots.map((slot) => {
             return (
-              <TableRow key={slot.id}>
-                <TableCell className="font-medium">{slot.time}</TableCell>
+              <TableRow key={slot.timeslots.id}>
+                <TableCell className="font-medium">
+                  {slot.timeslots.time}
+                </TableCell>
                 <TableCell className="font-medium text-center">
-                  {slot.orgId ? <SlotVergeben /> : <BuchungsDialog />}
+                  {slot.org?.id ? (
+                    <SlotVergeben />
+                  ) : (
+                    <BuchungsDialog slotId={slot.timeslots.id} />
+                  )}
                 </TableCell>
               </TableRow>
             );
@@ -68,14 +79,14 @@ const SlotVergeben = () => {
   );
 };
 
-const BuchungsDialog = () => {
+const BuchungsDialog = ({ slotId }: { slotId: number }) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
         <BuchungsButton />
       </DialogTrigger>
-      <DialogContent className="flex justify-center items-center  ">
-        <BuchungsForm />
+      <DialogContent className="flex justify-center items-center  max-h-full">
+        <BuchungsForm slotId={slotId} />
       </DialogContent>
     </Dialog>
   );

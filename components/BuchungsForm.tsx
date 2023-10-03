@@ -5,10 +5,6 @@ import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { createInsertSchema } from "drizzle-zod";
 
-const formSchema = createInsertSchema(orgs).omit({ id: true });
-
-z.setErrorMap(customErrorMap);
-
 import {
   Form,
   FormControl,
@@ -22,26 +18,45 @@ import { Input } from "@/components/ui/input";
 import { Button } from "./ui/button";
 import { orgs } from "@/db/schema/org";
 import { customErrorMap } from "@/lib/customErrorMap";
+import { useState } from "react";
+import { Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
 
-export function BuchungsForm() {
+export function BuchungsForm({ slotId }: { slotId: number }) {
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+
+  const formSchema = createInsertSchema(orgs).omit({ id: true });
+  z.setErrorMap(customErrorMap);
+
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    setLoading(true);
+    values.timeslotId = slotId;
+    const res = await fetch("/api/book", {
+      method: "POST",
+      body: JSON.stringify(values),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if ((await res.json()).success) {
+      router.push("/erfolg");
+    }
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    setLoading(false);
   }
-  console.log(form.formState.errors);
 
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="  md:w-2/3 md:gap-6 flex flex-col"
+        className="  md:w-2/3 md:gap-6 flex flex-col "
       >
         <FormField
           control={form.control}
@@ -158,8 +173,8 @@ export function BuchungsForm() {
           )}
         />
 
-        <Button className="" type="submit">
-          Buchen
+        <Button disabled={loading} className="" type="submit">
+          {loading ? <Loader2 className="animate-spin" /> : "Buchen"}
         </Button>
       </form>
     </Form>

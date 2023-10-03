@@ -44,6 +44,7 @@ const seed = async () => {
       description: "",
       tollitäten: "Prinz Uwe I. und Prinzessin Katharina die II",
       contact_name: "Pascal Oster",
+      timeslotId: 1,
     });
   } catch (err) {
     console.log("Error creating default org");

@@ -1,4 +1,5 @@
-import { varchar, pgTable, serial, text } from "drizzle-orm/pg-core";
+import { pgTable, serial, text, integer } from "drizzle-orm/pg-core";
+import { timeslots } from "./timeslots";
 
 export const orgs = pgTable("org", {
   id: serial("id").primaryKey(),
@@ -8,4 +9,5 @@ export const orgs = pgTable("org", {
   schlachtruf: text("schlachtruf").notNull(),
   tollitäten: text("tollitäten"),
   description: text("description"),
+  timeslotId: integer("timeslot_id").references(() => timeslots.id),
 });
