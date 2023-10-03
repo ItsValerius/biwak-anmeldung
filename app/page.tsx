@@ -36,7 +36,7 @@ export default async function Home() {
         <TableHeader>
           <TableRow>
             <TableHead>Uhrzeit</TableHead>
-            <TableHead className="text-center">Verfügbar</TableHead>
+            <TableHead className="text-center">Verfügbarkeit</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
