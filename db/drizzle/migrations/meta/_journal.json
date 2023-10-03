@@ -36,6 +36,13 @@
       "when": 1696339087124,
       "tag": "0004_equal_puppet_master",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1696345011298,
+      "tag": "0005_bitter_whizzer",
+      "breakpoints": true
     }
   ]
 }

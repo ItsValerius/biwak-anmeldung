@@ -159,7 +159,7 @@ export function BuchungsForm() {
         />
 
         <Button className="" type="submit">
-          Submit
+          Buchen
         </Button>
       </form>
     </Form>

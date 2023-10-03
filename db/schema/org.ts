@@ -1,11 +1,11 @@
-import { varchar, pgTable, serial } from "drizzle-orm/pg-core";
+import { varchar, pgTable, serial, text } from "drizzle-orm/pg-core";
 
 export const orgs = pgTable("org", {
   id: serial("id").primaryKey(),
-  name: varchar("name").unique().notNull(),
-  contact_name: varchar("contact_name").notNull(),
-  contact_mail: varchar("contact_mail").notNull(),
-  schlachtruf: varchar("schlachtruf").notNull(),
-  tollitäten: varchar("tollitäten"),
-  description: varchar("description"),
+  name: text("name").unique().notNull(),
+  contact_name: text("contact_name").notNull(),
+  contact_mail: text("contact_mail").notNull(),
+  schlachtruf: text("schlachtruf").notNull(),
+  tollitäten: text("tollitäten"),
+  description: text("description"),
 });
