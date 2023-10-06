@@ -15,7 +15,7 @@ export const authOptions = NextAuth({
       },
       async authorize(credentials) {
         const authResponse = await fetch(
-          `${process.env.VERCEL_URL}/api/auth/login`,
+          `${process.env.APP_URL}/api/auth/login`,
           {
             method: "POST",
             headers: {
