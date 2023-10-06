@@ -13,11 +13,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { redirect } from "next/navigation";
 const Dashboard = async () => {
   const session = await getServerSession(authOptions);
 
   if (!session) {
-    return;
+    return redirect("/");
   }
 
   const allSignups = await db
