@@ -1,7 +1,7 @@
 import db from "@/db/client";
 import { users } from "@/db/schema/users";
 import { eq } from "drizzle-orm";
-import { randomBytes, pbkdf2Sync } from "crypto";
+import { pbkdf2Sync } from "crypto";
 
 export const POST = async (request: Request) => {
   const json = await request.json();
@@ -11,7 +11,6 @@ export const POST = async (request: Request) => {
     .where(eq(json.username, users.username))
     .limit(1)
     .execute();
-  console.log(user);
 
   if (user.length === 0) return;
   const reqPWHex = pbkdf2Sync(
@@ -23,6 +22,6 @@ export const POST = async (request: Request) => {
   ).toString("hex");
   if (user[0].password === reqPWHex) {
     console.log("correct ");
-    return Response.json({ username: user[0].username });
+    return Response.json({ name: user[0].username });
   }
 };
