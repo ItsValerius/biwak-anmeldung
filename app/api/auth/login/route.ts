@@ -11,6 +11,8 @@ export const POST = async (request: Request) => {
     .where(eq(json.username, users.username))
     .limit(1)
     .execute();
+  console.log(user);
+
   if (user.length === 0) return;
   const reqPWHex = pbkdf2Sync(
     json.password,
@@ -19,6 +21,8 @@ export const POST = async (request: Request) => {
     64,
     "sha512",
   ).toString("hex");
-  if (user[0].password === reqPWHex)
+  if (user[0].password === reqPWHex) {
+    console.log("correct ");
     return Response.json({ username: user[0].username });
+  }
 };
