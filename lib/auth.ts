@@ -14,13 +14,16 @@ export const authOptions = NextAuth({
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        const authResponse = await fetch("/api/auth/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
+        const authResponse = await fetch(
+          `${process.env.VERCEL_URL}/api/auth/login`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(credentials),
           },
-          body: JSON.stringify(credentials),
-        });
+        );
 
         if (!authResponse.ok) {
           return null;
