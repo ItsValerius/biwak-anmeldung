@@ -1,5 +1,5 @@
 import db from "./client";
-import { orgs } from "./schema/org";
+import { orgs } from "./schema/orgs";
 import { timeslots } from "./schema/timeslots";
 
 const makeTimeSlots = async () => {

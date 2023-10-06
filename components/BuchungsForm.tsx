@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "./ui/button";
-import { orgs } from "@/db/schema/org";
+import { orgs } from "@/db/schema/orgs";
 import { customErrorMap } from "@/lib/customErrorMap";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
@@ -26,7 +26,12 @@ export function BuchungsForm({ slotId }: { slotId: number }) {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const formSchema = createInsertSchema(orgs).omit({ id: true });
+  const formSchema = createInsertSchema(orgs, {
+    contact_mail: (schema) =>
+      schema.contact_mail.email({
+        message: "Dieses Feld muss eine gültige Email Adresse enthalten.",
+      }),
+  }).omit({ id: true });
   z.setErrorMap(customErrorMap);
 
   // 1. Define your form.
@@ -48,7 +53,6 @@ export function BuchungsForm({ slotId }: { slotId: number }) {
     if ((await res.json()).success) {
       router.push("/erfolg");
     }
-    await new Promise((resolve) => setTimeout(resolve, 1000));
     setLoading(false);
   }
 
@@ -56,13 +60,13 @@ export function BuchungsForm({ slotId }: { slotId: number }) {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="  md:w-2/3 md:gap-6 flex flex-col "
+        className="flex flex-col md:grid md:grid-cols-3 md:gap-6"
       >
         <FormField
           control={form.control}
           name="name"
           render={({ field }) => (
-            <FormItem className="">
+            <FormItem>
               <FormLabel>Vereinsname</FormLabel>
               <FormControl>
                 <Input
@@ -173,7 +177,7 @@ export function BuchungsForm({ slotId }: { slotId: number }) {
           )}
         />
 
-        <Button disabled={loading} className="" type="submit">
+        <Button disabled={loading} className="md:col-span-3" type="submit">
           {loading ? <Loader2 className="animate-spin" /> : "Buchen"}
         </Button>
       </form>

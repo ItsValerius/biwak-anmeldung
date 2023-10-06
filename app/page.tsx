@@ -22,7 +22,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { BuchungsForm } from "@/components/BuchungsForm";
-import { orgs } from "@/db/schema/org";
+import { orgs } from "@/db/schema/orgs";
 import { eq } from "drizzle-orm";
 
 export default async function Home() {
@@ -33,11 +33,11 @@ export default async function Home() {
     .leftJoin(orgs, eq(timeslots.id, orgs.timeslotId));
 
   return (
-    <main className="flex min-h-screen flex-col items-center gap-12  md:gap-16 p-12 md:p-16 lg:p-24 max-w-5xl mx-auto">
-      <h1 className="text-3xl font-bold leading-tight tracking-tighter md:text-5xl text-center lg:leading-[1.1]">
+    <main className="mx-auto flex min-h-screen max-w-5xl flex-col  items-center gap-12 px-12 py-6 md:gap-16 md:px-16 md:py-8 lg:px-24 lg:py-10">
+      <h1 className="text-center text-3xl font-bold leading-tight tracking-tighter md:text-5xl lg:leading-[1.1]">
         Biwak Anmeldung KG Knallköpp Golkrath
       </h1>
-      <Table className=" md:text-lg md:w-full">
+      <Table className="md:w-full md:text-lg">
         <TableHeader>
           <TableRow>
             <TableHead>Uhrzeit</TableHead>
@@ -51,7 +51,7 @@ export default async function Home() {
                 <TableCell className="font-medium">
                   {slot.timeslots.time}
                 </TableCell>
-                <TableCell className="font-medium text-center">
+                <TableCell className="text-center font-medium">
                   {slot.org?.id ? (
                     <SlotVergeben />
                   ) : (
@@ -68,7 +68,7 @@ export default async function Home() {
 }
 
 const BuchungsButton = () => {
-  return <Button className="w-32"> Buchen</Button>;
+  return <Button className="w-32">Reservieren</Button>;
 };
 
 const SlotVergeben = () => {
@@ -85,7 +85,7 @@ const BuchungsDialog = ({ slotId }: { slotId: number }) => {
       <DialogTrigger asChild>
         <BuchungsButton />
       </DialogTrigger>
-      <DialogContent className="flex justify-center items-center  max-h-full">
+      <DialogContent className="flex max-h-full items-center justify-center md:max-w-3xl ">
         <BuchungsForm slotId={slotId} />
       </DialogContent>
     </Dialog>

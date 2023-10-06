@@ -63,12 +63,8 @@
           "name": "org_timeslot_id_timeslots_id_fk",
           "tableFrom": "org",
           "tableTo": "timeslots",
-          "columnsFrom": [
-            "timeslot_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["timeslot_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -78,9 +74,7 @@
         "org_name_unique": {
           "name": "org_name_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "name"
-          ]
+          "columns": ["name"]
         }
       }
     },
@@ -108,9 +102,7 @@
         "timeslots_timeslot_unique": {
           "name": "timeslots_timeslot_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "timeslot"
-          ]
+          "columns": ["timeslot"]
         }
       }
     }

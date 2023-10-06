@@ -6,7 +6,8 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Biwak Anmeldung 2024",
-  description: "Anmeldung für die Biwak der KG Knallköpp Golkrath 2024",
+  description:
+    "Anmeldung für den Biwak der KG Knallköpp Golkrath für das Jahr 2024",
 };
 
 export default function RootLayout({
