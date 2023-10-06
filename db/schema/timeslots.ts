@@ -1,5 +1,4 @@
-import { time, pgTable, serial, integer } from "drizzle-orm/pg-core";
-import { orgs } from "./orgs";
+import { time, pgTable, serial } from "drizzle-orm/pg-core";
 
 export const timeslots = pgTable("timeslots", {
   id: serial("id").primaryKey(),

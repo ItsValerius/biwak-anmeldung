@@ -1,0 +1,167 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "id": "38b25c09-613d-47ec-933e-919d4ff1accb",
+  "prevId": "aca919f5-d994-4dd7-ac4c-4cfde01a15f7",
+  "tables": {
+    "org": {
+      "name": "org",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "contact_name": {
+          "name": "contact_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "contact_mail": {
+          "name": "contact_mail",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "schlachtruf": {
+          "name": "schlachtruf",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tollitäten": {
+          "name": "tollitäten",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "description": {
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "timeslot_id": {
+          "name": "timeslot_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "org_timeslot_id_timeslots_id_fk": {
+          "name": "org_timeslot_id_timeslots_id_fk",
+          "tableFrom": "org",
+          "tableTo": "timeslots",
+          "columnsFrom": [
+            "timeslot_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "org_name_unique": {
+          "name": "org_name_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "name"
+          ]
+        }
+      }
+    },
+    "timeslots": {
+      "name": "timeslots",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "timeslot": {
+          "name": "timeslot",
+          "type": "time",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "timeslots_timeslot_unique": {
+          "name": "timeslots_timeslot_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "timeslot"
+          ]
+        }
+      }
+    },
+    "user": {
+      "name": "user",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "username": {
+          "name": "username",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "password": {
+          "name": "password",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "salt": {
+          "name": "salt",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "user_username_unique": {
+          "name": "user_username_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "username"
+          ]
+        }
+      }
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  }
+}

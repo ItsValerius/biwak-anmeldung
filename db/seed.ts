@@ -1,7 +1,8 @@
 import db from "./client";
 import { orgs } from "./schema/orgs";
 import { timeslots } from "./schema/timeslots";
-
+import { users } from "./schema/users";
+import { pbkdf2Sync, randomBytes } from "crypto";
 const makeTimeSlots = async () => {
   try {
     await db.insert(timeslots).values({ time: "17:11" });
@@ -33,9 +34,8 @@ const makeTimeSlots = async () => {
     console.log(err);
   }
 };
-const seed = async () => {
-  console.log("Seeding DB");
-  await makeTimeSlots();
+
+const makeOrg = async () => {
   try {
     await db.insert(orgs).values({
       name: "KG Knallköpp Golkrath",
@@ -48,8 +48,28 @@ const seed = async () => {
     });
   } catch (err) {
     console.log("Error creating default org");
-
     console.log(err);
   }
+};
+const seed = async () => {
+  console.log("Seeding DB");
+  await makeTimeSlots();
+  await makeOrg();
+  if (!process.env.DEFAULT_USERNAME || !process.env.DEFAULT_PW) {
+    throw new Error("Default Password or Username missing");
+  }
+  const salt = randomBytes(16).toString("hex");
+  const pw = pbkdf2Sync(
+    process.env.DEFAULT_PW,
+    salt,
+    1000,
+    64,
+    `sha512`,
+  ).toString(`hex`);
+  await db.insert(users).values({
+    username: process.env.DEFAULT_USERNAME,
+    password: pw,
+    salt: salt,
+  });
 };
 seed();
