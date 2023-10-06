@@ -51,10 +51,8 @@ const makeOrg = async () => {
     console.log(err);
   }
 };
-const seed = async () => {
-  console.log("Seeding DB");
-  await makeTimeSlots();
-  await makeOrg();
+
+const makeUser = async () => {
   if (!process.env.DEFAULT_USERNAME || !process.env.DEFAULT_PW) {
     throw new Error("Default Password or Username missing");
   }
@@ -66,10 +64,22 @@ const seed = async () => {
     64,
     `sha512`,
   ).toString(`hex`);
-  await db.insert(users).values({
-    username: process.env.DEFAULT_USERNAME,
-    password: pw,
-    salt: salt,
-  });
+  try {
+    await db.insert(users).values({
+      username: process.env.DEFAULT_USERNAME,
+      password: pw,
+      salt: salt,
+    });
+  } catch (err) {
+    console.log("There was an Error creating the Default User");
+    console.log(err);
+  }
+};
+
+const seed = async () => {
+  console.log("Seeding DB");
+  await makeTimeSlots();
+  await makeOrg();
+  await makeUser();
 };
 seed();
