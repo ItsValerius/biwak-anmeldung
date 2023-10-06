@@ -2,7 +2,7 @@ import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 console.log("test");
 
-const authOptions = NextAuth({
+export const authOptions = NextAuth({
   providers: [
     CredentialsProvider({
       // The name to display on the sign in form (e.g. "Sign in with...")
@@ -36,4 +36,4 @@ const authOptions = NextAuth({
   ],
 });
 
-export { authOptions as GET, authOptions as POST, authOptions };
+export { authOptions as GET, authOptions as POST };
