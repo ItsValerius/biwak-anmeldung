@@ -15,7 +15,17 @@ import { eq } from "drizzle-orm";
 import BuchungsDialog from "@/components/BuchungsDialog";
 import SlotVergeben from "@/components/SlotVergeben";
 
+export const runtime = "nodejs";
+export const revalidate = 60;
+
 export default async function Home() {
+  if (new Date() <= new Date(2023, 9, 13, 10, 0, 0)) {
+    return (
+      <h1 className="flex w-full items-center justify-center text-center text-3xl font-bold leading-tight tracking-tighter md:text-5xl lg:leading-[1.1]">
+        Die Anmeldung startet am 13.10.2023 um 10 Uhr
+      </h1>
+    );
+  }
   const slots = await db
     .select()
     .from(timeslots)
