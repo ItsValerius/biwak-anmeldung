@@ -51,7 +51,7 @@ export function BuchungsForm({ slotId }: { slotId: number }) {
       },
     });
     if ((await res.json()).success) {
-      router.push("/erfolg");
+      router.push("/erfolg?id=" + slotId);
     }
     setLoading(false);
   }

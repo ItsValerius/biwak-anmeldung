@@ -2,6 +2,7 @@ import db from "@/db/client";
 import { orgs } from "@/db/schema/orgs";
 import { customErrorMap } from "@/lib/customErrorMap";
 import { createInsertSchema } from "drizzle-zod";
+import { revalidatePath } from "next/cache";
 import z from "zod";
 export async function POST(request: Request) {
   const json = await request.json();
@@ -21,5 +22,6 @@ export async function POST(request: Request) {
       { status: 500 },
     );
   }
+  revalidatePath("/");
   return Response.json({ success: true }, { status: 200 });
 }
