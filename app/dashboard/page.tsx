@@ -14,6 +14,10 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { redirect } from "next/navigation";
+
+export const runtime = "nodejs";
+export const revalidate = 60;
+
 const Dashboard = async () => {
   const session = await getServerSession(authOptions);
 
