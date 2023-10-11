@@ -22,13 +22,14 @@ const Dashboard = async () => {
   const session = await getServerSession(authOptions);
 
   if (!session) {
-    return redirect("/");
+    return redirect("/api/auth/signin");
   }
 
   const allSignups = await db
     .select()
     .from(orgs)
-    .leftJoin(timeslots, eq(timeslots.id, orgs.timeslotId));
+    .leftJoin(timeslots, eq(timeslots.id, orgs.timeslotId))
+    .orderBy(timeslots.id);
 
   return (
     <main className="mx-auto flex min-h-screen max-w-7xl flex-col  items-center gap-12 px-12 py-6 md:gap-16 md:px-16 md:py-8 lg:px-24 lg:py-10">

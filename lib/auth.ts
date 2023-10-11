@@ -14,6 +14,7 @@ export const authOptions = NextAuth({
         username: { label: "Username", type: "text", placeholder: "jsmith" },
         password: { label: "Password", type: "password" },
       },
+
       async authorize(credentials) {
         const authResponse = await fetch(
           `${process.env.APP_URL}/api/auth/login`,
@@ -37,6 +38,11 @@ export const authOptions = NextAuth({
       },
     }),
   ],
+  callbacks: {
+    async redirect() {
+      return "/dashboard";
+    },
+  },
   session: {
     strategy: "jwt",
     maxAge: 30 * 24 * 60 * 60, // 30 Days
