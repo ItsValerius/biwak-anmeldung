@@ -37,12 +37,14 @@ export function BuchungsForm({ slotId }: { slotId: number }) {
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    defaultValues: {
+      timeslotId: slotId,
+    },
   });
 
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setLoading(true);
-    values.timeslotId = slotId;
     const res = await fetch("/api/book", {
       method: "POST",
       body: JSON.stringify(values),
@@ -50,10 +52,15 @@ export function BuchungsForm({ slotId }: { slotId: number }) {
         "Content-Type": "application/json",
       },
     });
-    if ((await res.json()).success) {
+    const json = await res.json();
+    if (json.success) {
       router.refresh();
       router.push("/erfolg?id=" + slotId);
+      return;
     }
+    form.setError("root", {
+      message: json.message,
+    });
     setLoading(false);
   }
 
@@ -63,6 +70,11 @@ export function BuchungsForm({ slotId }: { slotId: number }) {
         onSubmit={form.handleSubmit(onSubmit)}
         className="flex flex-col md:grid md:grid-cols-3 md:gap-6"
       >
+        {form.formState.errors && form.formState.errors.root && (
+          <p className=" mx-auto w-fit   rounded-md bg-destructive p-2 text-center text-slate-50 md:col-span-3">
+            {form.formState.errors.root.message}
+          </p>
+        )}
         <FormField
           control={form.control}
           name="name"
@@ -177,7 +189,20 @@ export function BuchungsForm({ slotId }: { slotId: number }) {
             </FormItem>
           )}
         />
-
+        <FormField
+          control={form.control}
+          name="timeslotId"
+          render={({ field }) => (
+            <FormItem className="hidden">
+              <FormLabel>Timeslot ID</FormLabel>
+              <FormControl>
+                <Input readOnly {...field} />
+              </FormControl>
+              <FormDescription>ID des timeslots.</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         <Button disabled={loading} className="md:col-span-3" type="submit">
           {loading ? <Loader2 className="animate-spin" /> : "Buchen"}
         </Button>

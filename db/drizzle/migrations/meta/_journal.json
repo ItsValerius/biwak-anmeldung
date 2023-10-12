@@ -57,6 +57,20 @@
       "when": 1696593814673,
       "tag": "0007_outstanding_boomerang",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "5",
+      "when": 1697109704915,
+      "tag": "0008_equal_slapstick",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "5",
+      "when": 1697110208831,
+      "tag": "0009_nappy_guardsmen",
+      "breakpoints": true
     }
   ]
 }

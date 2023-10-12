@@ -9,5 +9,8 @@ export const orgs = pgTable("org", {
   schlachtruf: text("schlachtruf").notNull(),
   tollitäten: text("tollitäten"),
   description: text("description"),
-  timeslotId: integer("timeslot_id").references(() => timeslots.id),
+  timeslotId: integer("timeslot_id")
+    .references(() => timeslots.id)
+    .unique()
+    .notNull(),
 });

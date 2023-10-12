@@ -1,0 +1,1 @@
+ALTER TABLE "org" ALTER COLUMN "timeslot_id" SET NOT NULL;
