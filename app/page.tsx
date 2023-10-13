@@ -20,6 +20,11 @@ export const dynamic = "force-dynamic";
 export default async function Home(searchParams: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
+  console.log(
+    new Date() <= new Date(2023, 9, 13, 10, 0, 0) &&
+      searchParams.searchParams.bypass != process.env.BYPASS_KEY,
+  );
+
   if (
     new Date() <= new Date(2023, 9, 13, 10, 0, 0) &&
     searchParams.searchParams.bypass != process.env.BYPASS_KEY
