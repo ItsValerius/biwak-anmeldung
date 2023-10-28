@@ -27,7 +27,7 @@ export default async function Home(searchParams: {
     .leftJoin(orgs, eq(timeslots.id, orgs.timeslotId));
 
   return (
-    <>
+    <main className="mx-auto flex min-h-screen max-w-5xl flex-col items-center justify-center gap-12 px-12 py-6 md:gap-16 md:px-16 md:py-8 lg:px-24 lg:py-10">
       <h1 className="text-center text-3xl font-bold leading-tight tracking-tighter md:text-5xl lg:leading-[1.1]">
         Biwak Anmeldung KG Knallköpp Golkrath
       </h1>
@@ -57,6 +57,6 @@ export default async function Home(searchParams: {
           })}
         </TableBody>
       </Table>
-    </>
+    </main>
   );
 }

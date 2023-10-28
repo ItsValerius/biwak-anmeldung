@@ -14,7 +14,7 @@ const Erfolg = async (searchParams: {
     .where(eq(timeslots.id, Number(searchParams.searchParams.id)));
   if (!slot || !slot[0]) return redirect("/");
   return (
-    <>
+    <main className="mx-auto flex min-h-screen max-w-5xl flex-col items-center justify-center gap-12 px-12 py-6 md:gap-16 md:px-16 md:py-8 lg:px-24 lg:py-10">
       <h1 className="text-center text-3xl font-bold leading-tight tracking-tighter md:text-5xl lg:leading-[1.1]">
         Biwak Anmeldung KG Knallköpp Golkrath
       </h1>
@@ -33,7 +33,7 @@ const Erfolg = async (searchParams: {
       <Button className="w-32 p-8 text-xl" asChild>
         <Link href={"/"}>Zurück</Link>
       </Button>
-    </>
+    </main>
   );
 };
 
